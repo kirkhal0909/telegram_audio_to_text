@@ -19,3 +19,7 @@ bundle install
 ```
 ruby main.rb
 ```
+
+---
+
+![alt text](telegram_answers.png)
