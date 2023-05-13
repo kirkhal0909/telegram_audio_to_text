@@ -1,4 +1,5 @@
 require 'dotenv/load'
+require 'httparty'
 require_relative 'lib/telegram_audio_to_text'
 
 print('Start Telegram bot')
