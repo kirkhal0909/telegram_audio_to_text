@@ -4,7 +4,7 @@ module TelegramAudioToText
   module APIs
     class TelegramBot
       API_KEY = ENV.fetch('TELEGRAM_API')
-      MAX_FILE_SIZE = 1024 * 1024 * 10 # 10 megabytes
+      MAX_FILE_SIZE = 1024 * 1024
       INFO_MESSAGE = [
         'Прикрепи новый аудиофайл, чтобы сконвертировать его в текст.',
         "Размер файла должен быть не более #{MAX_FILE_SIZE / 1024 / 1024} Мб"
@@ -26,7 +26,7 @@ module TelegramAudioToText
                           when '/start'
                             "Привет, #{message.from.first_name}!\n#{INFO_MESSAGE}"
                           when nil
-                            audio_message(bot, message)
+                            audio_message(bot, message) || 'Ничего не удалось распознать!'
                           else
                             INFO_MESSAGE
                           end
@@ -34,15 +34,21 @@ module TelegramAudioToText
       end
 
       def audio_message(bot, message)
-        if message.audio && message.audio.file_size <= MAX_FILE_SIZE
-          file = get_file(bot, message.audio.file_id)
+        message_audio = audio(message)
+        if message_audio && message_audio.file_size <= MAX_FILE_SIZE
+          file = get_file(bot, message_audio.file_id)
           return 'Возникла некоторая ошибка! Попробуйте загрузить файл снова' if file[:error]
 
-          # TODO: add recognition text
-          'some recognition text'
+          response = YandexRecognition.new.recognize(file[:binary])
+          result = response['error_message'] || response['result']
+          result == '' ? nil : result
         else
           INFO_MESSAGE
         end
+      end
+
+      def audio(message)
+        message.audio || message.voice
       end
 
       def get_file(bot, file_id)
