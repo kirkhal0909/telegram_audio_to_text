@@ -1,8 +1,4 @@
-require 'require_all'
-
-require 'pry'
-require 'dotenv/load'
-require_all 'lib/apis'
+require_relative 'boot'
 
 module TelegramAudioToText
 end
