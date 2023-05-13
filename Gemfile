@@ -9,5 +9,6 @@ gem 'rubocop'
 
 gem 'dotenv'
 gem 'telegram-bot-ruby'
+gem 'httparty'
 
 gem 'pry'
