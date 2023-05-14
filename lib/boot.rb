@@ -1,6 +1,10 @@
 require 'require_all'
 
+require 'aws-sdk'
+require 'json'
 require 'pry'
 require 'dotenv/load'
 require 'httparty'
+require_all 'configs'
+require_all 'lib/services'
 require_all 'lib/apis'

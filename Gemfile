@@ -10,6 +10,8 @@ gem 'rspec'
 gem 'rubocop'
 
 gem 'dotenv'
+
+gem 'aws-sdk'
 gem 'httparty'
 gem 'telegram-bot-ruby'
 
