@@ -14,9 +14,14 @@ ENV переменные прокидываются через файл **.env**
 make install
 ```
 
-# Запуск Telegram бота
+# Запуск redis, Sidekiq и Telegram бота
 ```
 make run
+```
+
+# Остановить redis, Sidekiq и Telegram бота
+```
+make stop
 ```
 
 # Открыть консоль с инициализированными объектами и гемами

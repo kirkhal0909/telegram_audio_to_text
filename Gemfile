@@ -15,4 +15,6 @@ gem 'aws-sdk'
 gem 'httparty'
 gem 'telegram-bot-ruby'
 
+gem 'sidekiq'
+
 gem 'pry'
